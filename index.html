@@ -366,6 +366,18 @@ html.nx-loading body{overflow:hidden}
  .hero .hero-copy::before{height:32px}
 }
 html.nx-loading .hero-word,html.nx-loading .hero-side{animation-play-state:paused}
+
+/* top bar: quieter actions */
+.nav-cta{gap:8px;align-items:center}
+.nav-cta .btn{min-height:34px;height:34px;padding:0 14px;border-radius:999px;font:500 .8125rem var(--body);letter-spacing:.01em;box-shadow:none}
+.nav-cta .btn-ghost{border-color:transparent;color:var(--text-2);background:transparent}
+.nav-cta .btn-ghost:hover{color:var(--text);background:rgba(245,247,250,.06);border-color:transparent}
+.nav-cta .btn-primary{background:rgba(124,92,255,.14);border:1px solid rgba(147,118,255,.32);color:#DCD3FF}
+.nav-cta .btn-primary:hover{background:rgba(124,92,255,.24);border-color:rgba(147,118,255,.55);color:#fff}
+.nav-cta .lang{height:34px;padding:2px;margin-left:6px;border-color:rgba(37,43,56,.9);background:transparent}
+.nav-cta .lang button{min-width:32px;height:28px;font-size:.6875rem;color:#7D8494}
+.nav-cta .lang button[aria-pressed="true"]{background:rgba(245,247,250,.09);color:var(--text)}
+@media(pointer:coarse){.nav-cta .btn{min-height:40px;height:40px}.nav-cta .lang{height:40px}.nav-cta .lang button{height:34px}}
 </style>
 <noscript><style>#nxLoader{display:none}</style></noscript>
 </head>
