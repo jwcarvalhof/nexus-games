@@ -335,6 +335,37 @@ body.paused *,body.paused *::before,body.paused *::after{animation-play-state:pa
 html.nx-loading .in1,html.nx-loading .in2,html.nx-loading .in3{animation-play-state:paused}
 html.nx-loading body{overflow:hidden}
 @media(prefers-reduced-motion:reduce){#nxLoader img,#nxLoader i::after{animation:none}}
+
+/* hero v2: centered mark over a giant wordmark */
+.hero{display:block;--logo-w:clamp(210px,25vw,420px)}
+.hero-word{position:absolute;left:50%;top:47%;transform:translate(-50%,-50%);z-index:-1;pointer-events:none;user-select:none;white-space:nowrap;
+  font:700 clamp(6rem,19.5vw,23rem)/.8 var(--display);letter-spacing:-.035em;
+  background:linear-gradient(180deg,#F7F4FF 8%,#DCD1FF 62%,#B9A8F4 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  opacity:.9;filter:drop-shadow(0 22px 40px rgba(6,7,10,.55));animation:wordIn 1.6s cubic-bezier(.2,.7,.2,1) both}
+@keyframes wordIn{from{opacity:0;letter-spacing:.04em;filter:blur(16px) drop-shadow(0 22px 40px rgba(6,7,10,0))}}
+.hero .hero-bottom{position:absolute;left:0;right:0;bottom:clamp(28px,6vh,64px);z-index:1;display:flex;justify-content:space-between;align-items:flex-end;gap:32px}
+.hero .hero-copy{padding:0;max-width:440px}
+.hero .hero-copy::before{content:"";display:block;width:1px;height:44px;margin:0 0 12px 3px;background:linear-gradient(180deg,rgba(245,247,250,0),rgba(245,247,250,.55))}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;font:500 .75rem var(--mono);letter-spacing:.16em;text-transform:uppercase;color:var(--text)}
+.hero-eyebrow i{width:7px;height:7px;border-radius:50%;background:var(--text);box-shadow:0 0 10px rgba(147,118,255,.9)}
+.hero h1{font:600 clamp(1.375rem,2.1vw,1.875rem)/1.2 var(--display);letter-spacing:-.01em;max-width:19ch;margin-top:14px}
+.hero .sub{margin-top:10px;font-size:clamp(.9375rem,1.1vw,1.0625rem);max-width:36ch}
+.hero .actions{margin-top:0}
+.hero-side{position:absolute;top:47%;z-index:1;color:var(--text-2);animation:sideIn 1.2s .7s ease both}
+.hs-l{left:clamp(16px,3vw,44px);writing-mode:vertical-rl;transform:translateY(-50%) rotate(180deg);font:500 .75rem var(--mono);letter-spacing:.24em}
+.hs-r{right:clamp(16px,3vw,44px);transform:translateY(-50%);list-style:none;margin:0;padding:0;display:grid;gap:18px}
+.hs-r i{display:block;width:18px;height:18px;background:center/contain no-repeat;opacity:.72;transition:opacity .2s}
+.hs-r li:hover i{opacity:1}
+@keyframes sideIn{from{opacity:0}}
+@media(max-width:899px){
+ .hero{padding-top:0}
+ .hero{--logo-w:clamp(150px,40vw,210px)}
+ .hero-word{top:42%;font-size:24vw}
+ .hero-side{display:none}
+ .hero .hero-bottom{flex-direction:column;align-items:flex-start;gap:22px;bottom:28px}
+ .hero .hero-copy::before{height:32px}
+}
+html.nx-loading .hero-word,html.nx-loading .hero-side{animation-play-state:paused}
 </style>
 <noscript><style>#nxLoader{display:none}</style></noscript>
 </head>
@@ -371,14 +402,18 @@ html.nx-loading body{overflow:hidden}
   <canvas id="heroUni" aria-hidden="true"></canvas>
   <canvas id="fx" aria-hidden="true"></canvas>
   <img class="core-logo" data-logo alt="" aria-hidden="true">
+  <div class="hero-word" id="heroWord" aria-hidden="true">NEXUS</div>
   <canvas class="logo3d" id="logo3d" aria-hidden="true"></canvas>
-  <div class="wrap">
+  <span class="hero-side hs-l" aria-hidden="true">2026</span>
+  <ul class="hero-side hs-r" aria-label="Steam, Xbox e Epic Games"><li><i id="hp-steam" title="Steam"></i></li><li><i id="hp-xbox" title="Xbox"></i></li><li><i id="hp-epic" title="Epic Games"></i></li></ul>
+  <div class="wrap hero-bottom">
     <div class="hero-copy">
+      <span class="hero-eyebrow in1"><i></i>Descoberta de jogos</span>
       <h1 class="in1">Encontre jogos que combinam com você.</h1>
       <p class="sub in2">Recomendações baseadas no que você já joga.</p>
-      <div class="actions in3">
-        <a class="btn btn-primary btn-lg cta-glow" href="#descobrir">Descobrir jogos →</a>
-      </div>
+    </div>
+    <div class="actions in3">
+      <a class="btn btn-primary btn-lg cta-glow" href="#descobrir">Descobrir jogos →</a>
     </div>
   </div>
 </section>
@@ -4755,7 +4790,7 @@ three/build/three.module.js:
 </script>
 <script>
 (function(){
-const EN={"Pular para o conteúdo": "Skip to content", "NEXUS, início": "NEXUS, home", "Principal": "Main", "Início": "Home", "Descobrir": "Discover", "Como funciona": "How it works", "Entrar": "Log in", "Criar conta": "Create account", "Encontre jogos que combinam com você.": "Find games that match you.", "Recomendações baseadas no que você já joga.": "Recommendations based on what you already play.", "Descobrir jogos →": "Discover games →", "Conecte onde você joga.": "Connect where you play.", "Reúna seus jogos e preferências em um só lugar.": "Bring your games and preferences together in one place.", "Chega de abrir um launcher por vez para lembrar onde estava aquele save.": "No more opening one launcher at a time to remember where that save was.", "Steam, Xbox e Epic Games conectados à NEXUS": "Steam, Xbox and Epic Games connected to NEXUS", "tudo sincronizado": "everything in sync", "Descubra além do que você já conhece.": "Discover beyond what you already know.", "Os jogos mais falados do momento, filtrados pelo seu histórico.": "The most talked-about games right now, filtered by your history.", "Legenda de compatibilidade com o seu perfil": "Compatibility legend for your profile", "Compatibilidade:": "Compatibility:", "71% a 100%": "71% to 100%", "41% a 70%": "41% to 70%", "0% a 40%": "0% to 40%", "Jogos em destaque": "Featured games", "A NEXUS entende seus gostos.": "NEXUS understands your taste.", "Seus jogos": "Your games", "Conectamos suas contas e reunimos tudo: horas jogadas, conquistas e o que ficou pela metade.": "We connect your accounts and gather everything: hours played, achievements and what you left half finished.", "Seus interesses": "Your interests", "Os gêneros e o clima que você mais repete viram sinais, sem formulário para preencher.": "The genres and moods you repeat most become signals, with no form to fill out.", "Seu perfil": "Your profile", "Um retrato do seu jeito de jogar, que aponta para o próximo jogo certo.": "A portrait of how you play, pointing to your next right game.", "Foto de perfil de Marcos Alberto": "Profile photo of Marcos Alberto", "Nível 47": "Level 47", "Conectado em": "Connected on", "Jogos": "Games", "Conquistas": "Achievements", "1.284h": "1,284h", "Horas jogadas": "Hours played", "Sua biblioteca": "Your library", "Gêneros favoritos": "Favorite genres", "Aventura": "Adventure", "Ação": "Action", "Corrida": "Racing", "Esportes": "Sports", "O que você procura": "What you're looking for", "Narrativa forte": "Strong story", "Mundo aberto": "Open world", "Jogo curto": "Short game", "História": "Story", "Exploração": "Exploration", "Conectar-se": "Connect", "Talvez você goste disso.": "You might like this.", "Toque em uma sugestão para ver por que ela combina com você.": "Tap a suggestion to see why it matches you.", "Perguntas frequentes": "Frequently asked questions", "Preciso passar minha senha da Steam, Xbox ou Epic?": "Do I need to give you my Steam, Xbox or Epic password?", "Não. Você entra pelo login oficial de cada plataforma e a NEXUS só lê a lista de jogos e as horas jogadas. Você pode desconectar uma conta quando quiser.": "No. You sign in through each platform's official login, and NEXUS only reads your game list and hours played. You can disconnect an account whenever you want.", "Quais plataformas funcionam?": "Which platforms work?", "Steam, Xbox e Epic Games no lançamento. Outras plataformas entram depois.": "Steam, Xbox and Epic Games at launch. More platforms come later.", "Como a NEXUS escolhe as recomendações?": "How does NEXUS choose recommendations?", "Cruzamos suas horas jogadas, seus gêneros e o que você terminou ou abandonou. Cada sugestão mostra os motivos, para você decidir sem adivinhar.": "We combine your hours played, your genres and what you finished or dropped. Each suggestion shows its reasons, so you can decide without guessing.", "Criar conta custa alguma coisa?": "Does creating an account cost anything?", "Criar a conta é gratuito.": "Creating an account is free.", "Encontre seu próximo jogo.": "Find your next game.", "Descubra. Jogue. Aproveite.": "Discover. Play. Enjoy.", "E-mail": "Email", "seu@email.com": "you@email.com", "Começar agora →": "Get started →", "NEXUS é um projeto conceitual. Nomes, capas e logos de jogos e plataformas pertencem aos seus respectivos donos. A compatibilidade é uma simulação para o perfil de exemplo.": "NEXUS is a concept project. Names, covers and logos of games and platforms belong to their respective owners. Compatibility is a simulation for the sample profile.", "Novo": "New", "de compatibilidade": "compatibility", "Disponível em": "Available on", "Por que recomendamos?": "Why we recommend it", "jogadas": "played", "Capa de": "Cover of", "Digite um e-mail válido, como nome@dominio.com.": "Enter a valid email, like name@domain.com.", "Pronto. Avisamos você assim que a NEXUS abrir.": "Done. We'll let you know as soon as NEXUS opens.", "Kratos e Atreus enfrentam o Ragnarök numa jornada pela mitologia nórdica.": "Kratos and Atreus face Ragnarök on a journey through Norse mythology.", "Você passou 86h em Elden Ring e gosta de combate exigente": "You spent 86h in Elden Ring and enjoy demanding combat", "Terminou Baldur's Gate 3, então curte narrativa forte": "You finished Baldur's Gate 3, so you like a strong story", "A campanha tem umas 25h, boa para quem prefere jogo curto": "The campaign runs about 25h, good if you prefer shorter games", "Lara Croft explora selvas e ruínas para impedir o fim do mundo.": "Lara Croft explores jungles and ruins to stop the end of the world.", "Mistura aventura e exploração, dois dos seus gêneros favoritos": "Mixes adventure and exploration, two of your favorite genres", "A campanha de umas 15h combina com seu gosto por jogo curto": "The roughly 15h campaign fits your taste for short games", "Tumbas com quebra-cabeças dão folga entre os combates": "Puzzle tombs give you a break between fights", "Aloy cruza o Oeste Proibido, um mundo aberto cheio de máquinas gigantes.": "Aloy crosses the Forbidden West, an open world full of giant machines.", "Reúne mundo aberto e narrativa forte, seus dois filtros mais usados": "Combines open world and strong story, your two most used filters", "Enfrentar máquinas grandes lembra os chefes de Elden Ring": "Fighting huge machines recalls the Elden Ring bosses", "Muita gente com biblioteca parecida com a sua terminou este jogo": "Many players with a library like yours finished this game", "Ação inspirada em Jornada ao Oeste, com chefes marcantes e visual mitológico.": "Action inspired by Journey to the West, with memorable bosses and a mythological look.", "Os chefes difíceis seguem o estilo dos que você enfrentou em Elden Ring": "The tough bosses follow the style of those you faced in Elden Ring", "Traz um clima mitológico novo para a sua biblioteca": "Brings a fresh mythological mood to your library", "A campanha em capítulos funciona bem em sessões curtas": "The chapter-based campaign works well in short sessions"};
+const EN={"Descoberta de jogos":"Game discovery","Steam, Xbox e Epic Games":"Steam, Xbox and Epic Games","Pular para o conteúdo": "Skip to content", "NEXUS, início": "NEXUS, home", "Principal": "Main", "Início": "Home", "Descobrir": "Discover", "Como funciona": "How it works", "Entrar": "Log in", "Criar conta": "Create account", "Encontre jogos que combinam com você.": "Find games that match you.", "Recomendações baseadas no que você já joga.": "Recommendations based on what you already play.", "Descobrir jogos →": "Discover games →", "Conecte onde você joga.": "Connect where you play.", "Reúna seus jogos e preferências em um só lugar.": "Bring your games and preferences together in one place.", "Chega de abrir um launcher por vez para lembrar onde estava aquele save.": "No more opening one launcher at a time to remember where that save was.", "Steam, Xbox e Epic Games conectados à NEXUS": "Steam, Xbox and Epic Games connected to NEXUS", "tudo sincronizado": "everything in sync", "Descubra além do que você já conhece.": "Discover beyond what you already know.", "Os jogos mais falados do momento, filtrados pelo seu histórico.": "The most talked-about games right now, filtered by your history.", "Legenda de compatibilidade com o seu perfil": "Compatibility legend for your profile", "Compatibilidade:": "Compatibility:", "71% a 100%": "71% to 100%", "41% a 70%": "41% to 70%", "0% a 40%": "0% to 40%", "Jogos em destaque": "Featured games", "A NEXUS entende seus gostos.": "NEXUS understands your taste.", "Seus jogos": "Your games", "Conectamos suas contas e reunimos tudo: horas jogadas, conquistas e o que ficou pela metade.": "We connect your accounts and gather everything: hours played, achievements and what you left half finished.", "Seus interesses": "Your interests", "Os gêneros e o clima que você mais repete viram sinais, sem formulário para preencher.": "The genres and moods you repeat most become signals, with no form to fill out.", "Seu perfil": "Your profile", "Um retrato do seu jeito de jogar, que aponta para o próximo jogo certo.": "A portrait of how you play, pointing to your next right game.", "Foto de perfil de Marcos Alberto": "Profile photo of Marcos Alberto", "Nível 47": "Level 47", "Conectado em": "Connected on", "Jogos": "Games", "Conquistas": "Achievements", "1.284h": "1,284h", "Horas jogadas": "Hours played", "Sua biblioteca": "Your library", "Gêneros favoritos": "Favorite genres", "Aventura": "Adventure", "Ação": "Action", "Corrida": "Racing", "Esportes": "Sports", "O que você procura": "What you're looking for", "Narrativa forte": "Strong story", "Mundo aberto": "Open world", "Jogo curto": "Short game", "História": "Story", "Exploração": "Exploration", "Conectar-se": "Connect", "Talvez você goste disso.": "You might like this.", "Toque em uma sugestão para ver por que ela combina com você.": "Tap a suggestion to see why it matches you.", "Perguntas frequentes": "Frequently asked questions", "Preciso passar minha senha da Steam, Xbox ou Epic?": "Do I need to give you my Steam, Xbox or Epic password?", "Não. Você entra pelo login oficial de cada plataforma e a NEXUS só lê a lista de jogos e as horas jogadas. Você pode desconectar uma conta quando quiser.": "No. You sign in through each platform's official login, and NEXUS only reads your game list and hours played. You can disconnect an account whenever you want.", "Quais plataformas funcionam?": "Which platforms work?", "Steam, Xbox e Epic Games no lançamento. Outras plataformas entram depois.": "Steam, Xbox and Epic Games at launch. More platforms come later.", "Como a NEXUS escolhe as recomendações?": "How does NEXUS choose recommendations?", "Cruzamos suas horas jogadas, seus gêneros e o que você terminou ou abandonou. Cada sugestão mostra os motivos, para você decidir sem adivinhar.": "We combine your hours played, your genres and what you finished or dropped. Each suggestion shows its reasons, so you can decide without guessing.", "Criar conta custa alguma coisa?": "Does creating an account cost anything?", "Criar a conta é gratuito.": "Creating an account is free.", "Encontre seu próximo jogo.": "Find your next game.", "Descubra. Jogue. Aproveite.": "Discover. Play. Enjoy.", "E-mail": "Email", "seu@email.com": "you@email.com", "Começar agora →": "Get started →", "NEXUS é um projeto conceitual. Nomes, capas e logos de jogos e plataformas pertencem aos seus respectivos donos. A compatibilidade é uma simulação para o perfil de exemplo.": "NEXUS is a concept project. Names, covers and logos of games and platforms belong to their respective owners. Compatibility is a simulation for the sample profile.", "Novo": "New", "de compatibilidade": "compatibility", "Disponível em": "Available on", "Por que recomendamos?": "Why we recommend it", "jogadas": "played", "Capa de": "Cover of", "Digite um e-mail válido, como nome@dominio.com.": "Enter a valid email, like name@domain.com.", "Pronto. Avisamos você assim que a NEXUS abrir.": "Done. We'll let you know as soon as NEXUS opens.", "Kratos e Atreus enfrentam o Ragnarök numa jornada pela mitologia nórdica.": "Kratos and Atreus face Ragnarök on a journey through Norse mythology.", "Você passou 86h em Elden Ring e gosta de combate exigente": "You spent 86h in Elden Ring and enjoy demanding combat", "Terminou Baldur's Gate 3, então curte narrativa forte": "You finished Baldur's Gate 3, so you like a strong story", "A campanha tem umas 25h, boa para quem prefere jogo curto": "The campaign runs about 25h, good if you prefer shorter games", "Lara Croft explora selvas e ruínas para impedir o fim do mundo.": "Lara Croft explores jungles and ruins to stop the end of the world.", "Mistura aventura e exploração, dois dos seus gêneros favoritos": "Mixes adventure and exploration, two of your favorite genres", "A campanha de umas 15h combina com seu gosto por jogo curto": "The roughly 15h campaign fits your taste for short games", "Tumbas com quebra-cabeças dão folga entre os combates": "Puzzle tombs give you a break between fights", "Aloy cruza o Oeste Proibido, um mundo aberto cheio de máquinas gigantes.": "Aloy crosses the Forbidden West, an open world full of giant machines.", "Reúne mundo aberto e narrativa forte, seus dois filtros mais usados": "Combines open world and strong story, your two most used filters", "Enfrentar máquinas grandes lembra os chefes de Elden Ring": "Fighting huge machines recalls the Elden Ring bosses", "Muita gente com biblioteca parecida com a sua terminou este jogo": "Many players with a library like yours finished this game", "Ação inspirada em Jornada ao Oeste, com chefes marcantes e visual mitológico.": "Action inspired by Journey to the West, with memorable bosses and a mythological look.", "Os chefes difíceis seguem o estilo dos que você enfrentou em Elden Ring": "The tough bosses follow the style of those you faced in Elden Ring", "Traz um clima mitológico novo para a sua biblioteca": "Brings a fresh mythological mood to your library", "A campanha em capítulos funciona bem em sessões curtas": "The chapter-based campaign works well in short sessions"};
 const VEN="Your profile: <b>story explorer</b>. You finish what you start when the story hooks you.";
 let q=null;try{q=new URLSearchParams(location.search).get('lang')}catch(e){}
 let st=null;try{st=localStorage.getItem('nexus-lang')}catch(e){}
@@ -4837,6 +4872,7 @@ document.getElementById('connIcons').innerHTML=['steam','xbox','epic'].map(k=>`<
 
 /* connect section: paint the real platform icons as backgrounds on the .plat badges */
 document.getElementById('pi-steam').style.backgroundImage=`url("${ICO.steam}")`;
+['steam','xbox','epic'].forEach(k=>{const e=document.getElementById('hp-'+k);if(e)e.style.backgroundImage=`url("${ICO[k]}")`});
 document.getElementById('pi-xbox').style.backgroundImage=`url("${ICO.xbox}")`;
 document.getElementById('pi-epic').style.backgroundImage=`url("${ICO.epic}")`;
 
@@ -4984,13 +5020,13 @@ document.getElementById('signup').addEventListener('submit',e=>{
  function setup(){
   const r=hero.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,2);
   W=r.width;H=r.height;cv.width=W*dpr;cv.height=H*dpr;ctx.setTransform(dpr,0,0,dpr,0,0);
-  const wide=W>=900;core.x=wide?W*.72:W*.5;core.y=wide?H*.5:H*.74;
-  [logo,document.getElementById('logo3d')].forEach(e=>{e.style.left=core.x+'px';e.style.top=core.y+'px'});window.__l3&&window.__l3.resize();
+  const wide=W>=900;core.x=W*.5;core.y=wide?H*.47:H*.42;
+  [logo,document.getElementById('logo3d'),document.getElementById('heroWord')].forEach(e=>{if(e){e.style.left=core.x+'px';e.style.top=core.y+'px'}});window.__l3&&window.__l3.resize();
   const n=wide?150:90;P=[];for(let i=0;i<n;i++)P.push(spawn(i%3,true));
   O=[];for(let i=0;i<26;i++)O.push({a:rnd(0,6.28),s:rnd(.25,.6)*(Math.random()<.5?-1:1),c:i%3,k:rnd(.85,1.15)});
  }
  function spawn(c,seed){
-  const wide=W>=900,xs=wide?[.45,.72,.98]:[.12,.5,.88];
+  const wide=W>=900,xs=wide?[.2,.5,.8]:[.12,.5,.88];
   const sx=W*xs[c]+rnd(-.05,.05)*W,sy=-10;
   const side=sx<core.x?-1:1;
   return {c,ang:rnd(0,6.283),t:seed?Math.random():0,sp:rnd(.09,.15),
@@ -5040,7 +5076,7 @@ document.getElementById('signup').addEventListener('submit',e=>{
   ctx.shadowColor='#fff';ctx.shadowBlur=14;ctx.fillStyle='#fff';ctx.beginPath();ctx.arc(hx,hy,3.2,0,6.283);ctx.fill();
   ctx.restore();
   ctx.save();ctx.globalCompositeOperation='destination-out';
-  let dg;if(W>=900){dg=ctx.createLinearGradient(0,0,W,0);dg.addColorStop(0,'rgba(0,0,0,.92)');dg.addColorStop(.45,'rgba(0,0,0,.55)');dg.addColorStop(.75,'rgba(0,0,0,0)')}else{dg=ctx.createLinearGradient(0,0,0,H);dg.addColorStop(0,'rgba(0,0,0,.9)');dg.addColorStop(.45,'rgba(0,0,0,.55)');dg.addColorStop(1,'rgba(0,0,0,.1)')}
+  const dg=ctx.createLinearGradient(0,0,0,H);dg.addColorStop(0,'rgba(0,0,0,.15)');dg.addColorStop(.55,'rgba(0,0,0,0)');dg.addColorStop(.78,'rgba(0,0,0,.55)');
   ctx.fillStyle=dg;ctx.fillRect(0,0,W,H);
   const bf=ctx.createLinearGradient(0,0,0,H);bf.addColorStop(.7,'rgba(0,0,0,0)');bf.addColorStop(1,'rgba(0,0,0,1)');ctx.fillStyle=bf;ctx.fillRect(0,0,W,H);
   ctx.restore();
@@ -5165,7 +5201,7 @@ document.getElementById('signup').addEventListener('submit',e=>{
 /* ---------- hero hover: a fluid wake over the dark universe ---------- */
 (function(){
  const hero=document.getElementById('inicio'),cv=document.getElementById('heroUni'),ctx=cv.getContext('2d');
- const PAD=90,T=620;
+ const PAD=90,T=620,BASE=.17;
  let W=0,H=0,dpr=1,layer=null,tw=[],built=false,raf=0,last=0;
  let mx=0,my=0,sx=0,sy=0,cx=0,cy=0,inside=false,str=0,hotR=0,hx=0,hy=0,hotAnim=null,hotOn=false,offT=0;
  const stamps=[];
@@ -5218,7 +5254,7 @@ document.getElementById('signup').addEventListener('submit',e=>{
   // fluid mask: soft stamps along the path (tapering wake) + the expanding hero reveal
   mc.setTransform(1,0,0,1,0,0);mc.clearRect(0,0,mk.width,mk.height);
   for(const q of stamps){const kk=1-(ts-q.t)/T;if(kk<=0)continue;const rr=q.r*(.3+.7*Math.pow(kk,1.1));mc.globalAlpha=Math.min(1,q.a*Math.pow(kk,1.2));mc.drawImage(sp,(q.x-rr)*MS,(q.y-rr)*MS,rr*2*MS,rr*2*MS)}
-  mc.globalAlpha=1;
+  mc.globalAlpha=1;mc.fillStyle='rgba(255,255,255,'+BASE+')';mc.fillRect(0,0,mk.width,mk.height);
   if(hotR>.8){const g=mc.createRadialGradient(hx*MS,hy*MS,0,hx*MS,hy*MS,hotR*MS);STOPS.forEach(([o,a])=>g.addColorStop(o,`rgba(255,255,255,${a})`));mc.fillStyle=g;mc.fillRect(0,0,mk.width,mk.height)}
   ctx.globalCompositeOperation='destination-in';ctx.imageSmoothingEnabled=true;ctx.drawImage(mk,0,0,W,H);ctx.globalCompositeOperation='source-over';
  }
@@ -5235,7 +5271,7 @@ document.getElementById('signup').addEventListener('submit',e=>{
   while(stamps.length&&ts-stamps[0].t>T)stamps.shift();
   while(stamps.length>200)stamps.shift();
   if(hotAnim){const k=Math.min(1,(ts-hotAnim.t)/hotAnim.d);hotR=hotAnim.a+(hotAnim.b-hotAnim.a)*eio(k);if(k>=1)hotAnim=null}
-  if(!stamps.length&&hotR<.8&&!hotAnim&&str<.01){hotR=0;ctx.setTransform(1,0,0,1,0,0);ctx.clearRect(0,0,cv.width,cv.height);return}
+  if(!stamps.length&&hotR<.8&&!hotAnim&&str<.01){hotR=0;draw(ts);return}
   draw(ts);raf=requestAnimationFrame(loop);
  }
  function kick(){if(!raf){last=performance.now();raf=requestAnimationFrame(loop)}}
@@ -5253,6 +5289,7 @@ document.getElementById('signup').addEventListener('submit',e=>{
  });
  addEventListener('scroll',()=>{if(inside)pos()},{passive:true});
  let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{built=false;kick()},150)});
+ kick();
 })();
 </script>
 <script>
